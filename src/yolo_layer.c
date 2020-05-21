@@ -620,7 +620,7 @@ void forward_yolo_layer(const layer l, network_state state)
     }
 
     //custom iou_loss: 0.6 * mAP + 0.4 * IoU
-    /*if (l.iou_loss == CUSTOM) {
+    /*if (l.iou_loss == CUSTOM_LOSS) {
         *(l.cost) = ;
     }*/
 
