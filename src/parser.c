@@ -1051,6 +1051,7 @@ route_layer parse_route(list *options, size_params params)
 
 learning_rate_policy get_policy(char *s)
 {
+    if (strcmp(s, "custom")==0) return CUSTOM;
     if (strcmp(s, "random")==0) return RANDOM;
     if (strcmp(s, "poly")==0) return POLY;
     if (strcmp(s, "constant")==0) return CONSTANT;
