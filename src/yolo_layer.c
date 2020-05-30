@@ -616,7 +616,7 @@ void forward_yolo_layer(const layer l, network_state state)
         else {
             avg_iou_loss = count > 0 ? l.iou_normalizer * (tot_iou_loss / count) : 0;
         }
-        *(l.cost) = 0,8 * avg_iou_loss + 1,2 * classification_loss;
+        *(l.cost) = avg_iou_loss + classification_loss;
     }
 
     //custom iou_loss: 0.6 * mAP + 0.4 * IoU
