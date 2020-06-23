@@ -446,7 +446,8 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
     for(i = 0; i < num; ++i){
         int class_id = max_index(probs[i], classes);
         float prob = probs[i][class_id];
-        //if(prob > thresh){
+        //if(prob > thresh)
+        {
 
             //// for comparison with OpenCV version of DNN Darknet Yolo v2
             //printf("\n %f, %f, %f, %f, ", boxes[i].x, boxes[i].y, boxes[i].w, boxes[i].h);
