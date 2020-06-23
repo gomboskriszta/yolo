@@ -564,7 +564,7 @@ void get_region_detections(layer l, int w, int h, int netw, int neth, float thre
                         int class_index = entry_index(l, 0, n*l.w*l.h + i, l.coords + 1 + map[j]);
                         float prob = scale*predictions[class_index];
                         //dets[index].prob[j] = (prob > thresh) ? prob : 0;
-                        probs[index][j] = 0.1;
+                        dets[index].prob[j] = 0.1;
                     }
                 }
                 else {
@@ -578,7 +578,7 @@ void get_region_detections(layer l, int w, int h, int netw, int neth, float thre
                         int class_index = entry_index(l, 0, n*l.w*l.h + i, l.coords + 1 + j);
                         float prob = scale*predictions[class_index];
                         //dets[index].prob[j] = (prob > thresh) ? prob : 0;
-                        probs[index][j] = 0.1;
+                        dets[index].prob[j] = 0.1;
                     }
                 }
             }
