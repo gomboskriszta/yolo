@@ -823,11 +823,11 @@ int get_yolo_detections(layer l, int w, int h, int netw, int neth, float thresh,
                     float prob = objectness*predictions[class_index];
                     if (j == 5 && (prob < 0.25 && prob > 0.0) && dets[count].prob[0]) { //in case of bubbles
                         prob = P_bubbles_given_specularity;
-                        printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
+                        //printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
                     }
                     if (j == 3 && (prob < 0.25 && prob > 0.0) && dets[count].prob[1]) { // in case of contrast
                         prob = P_contrast_given_saturaion;
-                        printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
+                        //printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
                     }
                     dets[count].prob[j] = (prob > thresh) ? prob : 0;
                 }
@@ -869,11 +869,11 @@ int get_yolo_detections_batch(layer l, int w, int h, int netw, int neth, float t
                     float prob = objectness*predictions[class_index];
                     if (j == 5 && (prob < 0.25 && prob > 0.0) && dets[count].prob[0]) { //in case of bubbles
                         prob = P_bubbles_given_specularity;
-                        printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
+                        //printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
                     }
                     if (j == 3 && (prob < 0.25 && prob > 0.0) && dets[count].prob[1]) { // in case of contrast
                         prob = P_contrast_given_saturaion;
-                        printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
+                        //printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
                     }
                     dets[count].prob[j] = (prob > thresh) ? prob : 0;
                 }
