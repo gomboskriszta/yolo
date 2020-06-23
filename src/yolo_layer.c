@@ -819,7 +819,8 @@ int get_yolo_detections(layer l, int w, int h, int netw, int neth, float thresh,
                         dets[count].prob[j] = 0.35678;
                         prob = 0.35678;
                     }
-                    dets[count].prob[j] = (prob > thresh) ? prob : 0;
+                    //dets[count].prob[j] = (prob > thresh) ? prob : 0;
+                    dets[count].prob[j] = 0.5;
                     if (j == 3) { // in case of contrast
 
                     }
