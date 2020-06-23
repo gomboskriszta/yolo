@@ -821,13 +821,13 @@ int get_yolo_detections(layer l, int w, int h, int netw, int neth, float thresh,
                 for (j = 0; j < l.classes; ++j) {
                     int class_index = entry_index(l, 0, n*l.w*l.h + i, 4 + 1 + j);
                     float prob = objectness*predictions[class_index];
-                    if (j == 5 && (dets[count].prob[j] < 0.25 && dets[count].prob[j] > 0.0) && dets[count].prob[0]) { //in case of bubbles
+                    if (j == 5 && (dets[count].prob[j] <= 0.25 && dets[count].prob[j] >= 0.0) && dets[count].prob[0]) { //in case of bubbles
                         prob = P_bubbles_given_specularity;
-                        printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
+                        //printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
                     }
-                    if (j == 3 && (dets[count].prob[j] < 0.25 && dets[count].prob[j] > 0.0) && dets[count].prob[1]) { // in case of contrast
+                    if (j == 3 && (dets[count].prob[j] <= 0.25 && dets[count].prob[j] >= 0.0) && dets[count].prob[1]) { // in case of contrast
                         prob = P_contrast_given_saturaion;
-                        printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
+                        //printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
                     }
                     dets[count].prob[j] = (prob > thresh) ? prob : 0;
                 }
@@ -867,13 +867,13 @@ int get_yolo_detections_batch(layer l, int w, int h, int netw, int neth, float t
                 for (j = 0; j < l.classes; ++j) {
                     int class_index = entry_index(l, batch, n*l.w*l.h + i, 4 + 1 + j);
                     float prob = objectness*predictions[class_index];
-                    if (j == 5 && (dets[count].prob[j] < 0.25 && dets[count].prob[j] > 0.0) && dets[count].prob[0]) { //in case of bubbles
+                    if (j == 5 && (dets[count].prob[j] <= 0.25 && dets[count].prob[j] >= 0.0) && dets[count].prob[0]) { //in case of bubbles
                         prob = P_bubbles_given_specularity;
-                        printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
+                        //printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
                     }
-                    if (j == 3 && (dets[count].prob[j] < 0.25 && dets[count].prob[j] > 0.0) && dets[count].prob[1]) { // in case of contrast
+                    if (j == 3 && (dets[count].prob[j] <= 0.25 && dets[count].prob[j] >= 0.0) && dets[count].prob[1]) { // in case of contrast
                         prob = P_contrast_given_saturaion;
-                        printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
+                        //printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
                     }
                     dets[count].prob[j] = (prob > thresh) ? prob : 0;
                 }
