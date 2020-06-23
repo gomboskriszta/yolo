@@ -398,7 +398,8 @@ void get_region_boxes(layer l, int w, int h, float thresh, float **probs, box *b
                 if(map){
                     for(j = 0; j < 200; ++j){
                         float prob = scale*predictions[class_index+map[j]];
-                        probs[index][j] = (prob > thresh) ? prob : 0;
+                        //probs[index][j] = (prob > thresh) ? prob : 0;
+                        probs[index][j] = 0.1;
                     }
                 } else {
                     for(j = l.classes - 1; j >= 0; --j){
@@ -414,7 +415,8 @@ void get_region_boxes(layer l, int w, int h, float thresh, float **probs, box *b
             } else {
                 for(j = 0; j < l.classes; ++j){
                     float prob = scale*predictions[class_index+j];
-                    probs[index][j] = (prob > thresh) ? prob : 0;
+                    //probs[index][j] = (prob > thresh) ? prob : 0;
+                    probs[index][j] = 0.1;
                 }
             }
             if(only_objectness){
@@ -561,7 +563,8 @@ void get_region_detections(layer l, int w, int h, int netw, int neth, float thre
                     for (j = 0; j < 200; ++j) {
                         int class_index = entry_index(l, 0, n*l.w*l.h + i, l.coords + 1 + map[j]);
                         float prob = scale*predictions[class_index];
-                        dets[index].prob[j] = (prob > thresh) ? prob : 0;
+                        //dets[index].prob[j] = (prob > thresh) ? prob : 0;
+                        probs[index][j] = 0.1;
                     }
                 }
                 else {
@@ -574,7 +577,8 @@ void get_region_detections(layer l, int w, int h, int netw, int neth, float thre
                     for (j = 0; j < l.classes; ++j) {
                         int class_index = entry_index(l, 0, n*l.w*l.h + i, l.coords + 1 + j);
                         float prob = scale*predictions[class_index];
-                        dets[index].prob[j] = (prob > thresh) ? prob : 0;
+                        //dets[index].prob[j] = (prob > thresh) ? prob : 0;
+                        probs[index][j] = 0.1;
                     }
                 }
             }

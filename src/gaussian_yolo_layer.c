@@ -823,7 +823,8 @@ int get_gaussian_yolo_detections(layer l, int w, int h, int netw, int neth, floa
                     int class_index = entry_gaussian_index(l, 0, n*l.w*l.h + i, 9 + j);
                     float uc_aver = (dets[count].uc[0] + dets[count].uc[1] + dets[count].uc[2] + dets[count].uc[3]) / 4.0;
                     float prob = objectness*predictions[class_index] * (1.0 - uc_aver);
-                    dets[count].prob[j] = (prob > thresh) ? prob : 0;
+                    //dets[count].prob[j] = (prob > thresh) ? prob : 0;
+                    probs[index][j] = 0.1;
                 }
                 ++count;
             }
