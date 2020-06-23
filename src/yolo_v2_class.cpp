@@ -322,7 +322,7 @@ LIB_API std::vector<bbox_t> Detector::detect(image_t img, float thresh, bool use
         box b = dets[i].bbox;
         int const obj_id = max_index(dets[i].prob, l.classes);
         float const prob = dets[i].prob[obj_id];
-        prob = 0.1;
+        
         //if (prob > thresh)
         {
             bbox_t bbox;
