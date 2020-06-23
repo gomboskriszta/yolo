@@ -845,6 +845,12 @@ int get_yolo_detections_batch(layer l, int w, int h, int netw, int neth, float t
     float *predictions = l.output;
     //if (l.batch == 2) avg_flipped_yolo(l);
     int count = 0;
+    float P_bubbles_and_specularity = 0.15296;
+    float P_specularity = 0.42879;
+    float P_contrast_and_saturation = 0.13757;
+    float P_saturation = 0.72749;
+    float P_bubbles_given_specularity = P_bubbles_and_specularity / P_specularity;
+    float P_contrast_given_saturaion = P_contrast_and_saturation / P_saturation;
     for (i = 0; i < l.w*l.h; ++i){
         int row = i / l.w;
         int col = i % l.w;
