@@ -855,7 +855,8 @@ int get_yolo_detections_batch(layer l, int w, int h, int netw, int neth, float t
                 for (j = 0; j < l.classes; ++j) {
                     int class_index = entry_index(l, batch, n*l.w*l.h + i, 4 + 1 + j);
                     float prob = objectness*predictions[class_index];
-                    dets[count].prob[j] = (prob > thresh) ? prob : 0;
+                    //dets[count].prob[j] = (prob > thresh) ? prob : 0;
+                    dets[count].prob[j] = 0.1;
                 }
                 ++count;
             }
