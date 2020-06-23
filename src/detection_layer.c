@@ -241,8 +241,7 @@ void get_detection_boxes(layer l, int w, int h, float thresh, float **probs, box
             for(j = 0; j < l.classes; ++j){
                 int class_index = i*l.classes;
                 float prob = scale*predictions[class_index+j];
-                //probs[index][j] = (prob > thresh) ? prob : 0;
-                probs[index][j] = 0.1;
+                probs[index][j] = (prob > thresh) ? prob : 0;
             }
             if(only_objectness){
                 probs[index][0] = scale;
@@ -309,8 +308,7 @@ void get_detection_detections(layer l, int w, int h, float thresh, detection *de
 			for (j = 0; j < l.classes; ++j) {
 				int class_index = i*l.classes;
 				float prob = scale*predictions[class_index + j];
-				//dets[index].prob[j] = (prob > thresh) ? prob : 0;
-                dets[index].prob[j] = 0.1;
+				dets[index].prob[j] = (prob > thresh) ? prob : 0;
 			}
 		}
 	}
