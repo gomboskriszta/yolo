@@ -799,10 +799,6 @@ int get_yolo_detections(layer l, int w, int h, int netw, int neth, float thresh,
     // Need to comment it in order to batch processing >= 2 images
     //if (l.batch == 2) avg_flipped_yolo(l);
     int count = 0;
-    float P_specularity_given_bubbles = 0.51634;
-    float P_bubbles_given_specularity;
-    float P_saturation_given_contrast = 0.31725;
-    float P_contrast_given_saturaion;
     for (i = 0; i < l.w*l.h; ++i){
         int row = i / l.w;
         int col = i % l.w;
@@ -819,18 +815,6 @@ int get_yolo_detections(layer l, int w, int h, int netw, int neth, float thresh,
                 for (j = 0; j < l.classes; ++j) {
                     int class_index = entry_index(l, 0, n*l.w*l.h + i, 4 + 1 + j);
                     float prob = objectness*predictions[class_index];
-                    if (j == 5 && (prob < 0.25 && prob > 0.0) && dets[count].prob[0]) { //in case of bubbles
-                        //printf("Entered bubbles: prob %f\n", prob);
-                        P_bubbles_given_specularity = (P_specularity_given_bubbles * prob) / (P_specularity_given_bubbles * prob + (1 - P_specularity_given_bubbles) * (1 - prob));
-                        prob = P_bubbles_given_specularity;
-                        //printf("Entered bubbles: P_bubbles_given_specularity %f\n", P_bubbles_given_specularity);
-                    }
-                    if (j == 3 && (prob < 0.25 && prob > 0.0) && dets[count].prob[1]) { // in case of contrast
-                        //printf("Entered contrast: prob %f\n", prob);
-                        P_contrast_given_saturaion = (P_saturation_given_contrast * prob) / (P_saturation_given_contrast * prob + (1 - P_saturation_given_contrast) * (1 - prob));
-                        prob = P_contrast_given_saturaion;
-                        //printf("Entered contrast: P_contrast_given_saturaion %f\n", P_contrast_given_saturaion);
-                    }
                     dets[count].prob[j] = (prob > thresh) ? prob : 0;
                 }
                 ++count;
@@ -847,10 +831,6 @@ int get_yolo_detections_batch(layer l, int w, int h, int netw, int neth, float t
     float *predictions = l.output;
     //if (l.batch == 2) avg_flipped_yolo(l);
     int count = 0;
-    float P_specularity_given_bubbles = 0.51634;
-    float P_bubbles_given_specularity;
-    float P_saturation_given_contrast = 0.31725;
-    float P_contrast_given_saturaion;
     for (i = 0; i < l.w*l.h; ++i){
         int row = i / l.w;
         int col = i % l.w;
@@ -867,16 +847,6 @@ int get_yolo_detections_batch(layer l, int w, int h, int netw, int neth, float t
                 for (j = 0; j < l.classes; ++j) {
                     int class_index = entry_index(l, batch, n*l.w*l.h + i, 4 + 1 + j);
                     float prob = objectness*predictions[class_index];
-                    if (j == 5 && (prob < 0.25 && prob > 0.0) && dets[count].prob[0]) { //in case of bubbles
-                        P_bubbles_given_specularity = (P_specularity_given_bubbles * prob) / (P_specularity_given_bubbles * prob + (1 - P_specularity_given_bubbles) * (1 - prob));
-                        prob = P_bubbles_given_specularity;
-                        //printf("Entered bubbles: prob %f\n", P_bubbles_given_specularity);
-                    }
-                    if (j == 3 && (prob < 0.25 && prob > 0.0) && dets[count].prob[1]) { // in case of contrast
-                        P_contrast_given_saturaion = (P_saturation_given_contrast * prob) / (P_saturation_given_contrast * prob + (1 - P_saturation_given_contrast) * (1 - prob));
-                        prob = P_contrast_given_saturaion;
-                        //printf("Entered contrast: prob %f\n", P_contrast_given_saturaion);
-                    }
                     dets[count].prob[j] = (prob > thresh) ? prob : 0;
                 }
                 ++count;
